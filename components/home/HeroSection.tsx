@@ -87,7 +87,7 @@ export default function HeroSection() {
                         </Button>
                       </Link>
                     ) : (
-                    <Link href="/products">
+                    <Link href="/groceries">
                       <Button size="lg" className="bg-green-600 hover:bg-green-700">
                         <ShoppingBag className="mr-2 h-5 w-5" />
                         {slide.cta}

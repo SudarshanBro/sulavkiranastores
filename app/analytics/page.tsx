@@ -227,7 +227,7 @@ function AdminAnalytics() {
                           background: `conic-gradient(from ${rotation}deg, ${item.color} 0deg, ${item.color} ${angle}deg, transparent ${angle}deg)`,
                           transform: pieChartAnimated ? 'scale(1)' : 'scale(0)',
                           opacity: pieChartAnimated ? 1 : 0,
-                          transitionDelay: `${index * 150}ms`
+                          transitionDelay: `${index * 500}ms`
                         }}
                       />
                     );
@@ -276,7 +276,7 @@ function AdminAnalytics() {
                 {mockRevenueByMonth.map((month, index) => {
                   // Use a fixed range of 2000 for better visibility and taller bars
                   const minRevenue = Math.min(...mockRevenueByMonth.map(m => m.revenue));
-                  const barHeight = ((month.revenue - minRevenue) / 2000) * 90 + 10; // 10% minimum, 90% range
+                  const barHeight = ((month.revenue-15000) / 200) * 90 + 10; // 10% minimum, 90% range
                   
                   return (
                     <div key={month.month} className="flex-1 flex flex-col items-center group">
@@ -285,8 +285,8 @@ function AdminAnalytics() {
                           className="w-full bg-gradient-to-t from-purple-500 to-purple-300 rounded-t transition-all duration-1000 ease-out hover:from-purple-600 hover:to-purple-400 cursor-pointer"
                           style={{
                             height: barChartAnimated ? `${barHeight}%` : '0%',
-                            transitionDelay: `${index * 100}ms`,
-                            minHeight: '8px'
+                            transitionDelay: `${index * 200}ms`,
+                            minHeight: '80px'
                           }}
                           title={`${month.month}: ${formatCurrency(month.revenue)}`}
                         />
@@ -309,10 +309,10 @@ function AdminAnalytics() {
               
               {/* Chart summary */}
               <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-black-600">
                   <span className="font-medium">Total:</span> {formatCurrency(mockRevenueByMonth.reduce((sum, month) => sum + month.revenue, 0))}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-black-600">
                   <span className="font-medium">Average:</span> {formatCurrency(Math.round(mockRevenueByMonth.reduce((sum, month) => sum + month.revenue, 0) / mockRevenueByMonth.length))}
                 </div>
               </div>
@@ -335,7 +335,7 @@ function AdminAnalytics() {
             {/* Line Graph Container */}
             <div className="relative h-80 w-full">
               {/* Grid lines */}
-              <div className="absolute inset-0 grid grid-cols-6 grid-rows-4">
+              <div className="absolute inset-0 grid grid-cols-6 grid-rows-4  transitionDelay: `${index * 40000}ms`,">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="border-r border-gray-100"></div>
                 ))}

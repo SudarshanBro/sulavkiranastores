@@ -66,7 +66,7 @@ export default function NewArrivals() {
             </Button>
           </div>
           
-          <Link href="/products">
+          <Link href="/groceries">
             <Button variant="ghost" className="text-green-600 hover:text-green-700">
               View All
               <ArrowRight className="ml-2 h-4 w-4" />

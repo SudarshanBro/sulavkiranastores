@@ -42,11 +42,15 @@ export default function Footer() {
               Your trusted neighborhood store in Dhairing, serving quality products with care.
             </p>
             <div className="flex space-x-4">
-              <Facebook 
-                className="h-5 w-5 text-gray-400 hover:text-blue-400 cursor-pointer transition-colors" 
+              <button
+                type="button"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
                 onClick={handleFacebookClick}
                 title={`Facebook - ${facebookLinks[currentFacebookLink]}`}
-              />
+                aria-label="Open Facebook"
+              >
+                <Facebook className="h-5 w-5 cursor-pointer" />
+              </button>
               <Instagram className="h-5 w-5 text-gray-400 hover:text-pink-400 cursor-pointer transition-colors" />
               <Twitter className="h-5 w-5 text-gray-400 hover:text-blue-400 cursor-pointer transition-colors" />
             </div>
