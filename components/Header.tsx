@@ -21,6 +21,7 @@ import { useAuth } from '@/lib/auth-context';
 import LogoutDialog from '@/components/LogoutDialog';
 import { Store, ShoppingCart, User, Menu, Search, LogOut, LayoutDashboard } from 'lucide-react';
 import { mockProducts } from '@/lib/mock-data';
+import type { Product } from '@/types';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ export default function Header() {
   const pathname = usePathname();
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState<Product[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0);
@@ -69,7 +70,7 @@ export default function Header() {
     }
   };
 
-  const handleSearchSelect = (product) => {
+  const handleSearchSelect = (product: Product) => {
     setShowSearch(false);
     setSearchTerm('');
     setSuggestions([]);
