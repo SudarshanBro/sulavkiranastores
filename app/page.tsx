@@ -71,7 +71,7 @@ export default function Home() {
     <div className="min-h-screen">
       <Header />
       <main>
-        <HeroSection />
+        <LandingPage />
       </main>
       <Footer />
       
@@ -83,7 +83,7 @@ export default function Home() {
   );
 }
 
-export function LandingPage() {
+function LandingPage() {
   return (
     <section className="relative h-[600px] overflow-hidden flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50">
       <Image
