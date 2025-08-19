@@ -8,6 +8,10 @@ interface User {
   email: string;
   role: 'admin' | 'customer';
   loyaltyPoints?: number;
+  phone?: string;
+  address?: string;
+  avatar?: string;
+  memberSince?: string;
 }
 
 interface AuthContextType {
