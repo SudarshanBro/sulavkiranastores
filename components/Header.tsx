@@ -21,7 +21,9 @@ import { useAuth } from '@/lib/auth-context';
 import LogoutDialog from '@/components/LogoutDialog';
 import { Store, ShoppingCart, User, Menu, Search, LogOut, LayoutDashboard } from 'lucide-react';
 import { mockProducts } from '@/lib/mock-data';
-import type { Product } from '@/types';
+
+// Derive product type locally to avoid path alias/type import issues in CI
+type ProductType = typeof mockProducts[number];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +34,7 @@ export default function Header() {
   const pathname = usePathname();
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState<Product[]>([]);
+  const [suggestions, setSuggestions] = useState<ProductType[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0);
@@ -60,19 +62,19 @@ export default function Header() {
     const value = e.target.value;
     setSearchTerm(value);
     if (value.length > 0) {
-      const filtered: Product[] = mockProducts.filter((p) =>
+      const filtered: ProductType[] = mockProducts.filter((p) =>
         p.name.toLowerCase().includes(value.toLowerCase())
       );
       setSuggestions(filtered);
     } else {
-      setSuggestions([] as Product[]);
+      setSuggestions([] as ProductType[]);
     }
   };
 
-  const handleSearchSelect = (product: Product) => {
+  const handleSearchSelect = (product: ProductType) => {
     setShowSearch(false);
     setSearchTerm('');
-    setSuggestions([]);
+    setSuggestions([] as ProductType[]);
     router.push(`/groceries#product-${product.id}`);
   };
 
@@ -82,7 +84,7 @@ export default function Header() {
     } else {
       setShowSearch(false);
       setSearchTerm('');
-      setSuggestions([]);
+      setSuggestions([] as ProductType[]);
       router.push('/groceries');
     }
   };
@@ -144,7 +146,7 @@ export default function Header() {
                     </div>
                     {suggestions.length > 0 && (
                       <ul className="mt-2 max-h-40 overflow-y-auto">
-                        {suggestions.map((product: Product) => (
+                        {suggestions.map((product: ProductType) => (
                           <li
                             key={product.id}
                             className="px-2 py-1 cursor-pointer hover:bg-green-50 rounded"
