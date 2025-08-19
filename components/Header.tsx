@@ -60,13 +60,12 @@ export default function Header() {
     const value = e.target.value;
     setSearchTerm(value);
     if (value.length > 0) {
-      setSuggestions(
-        mockProducts.filter((p) =>
-          p.name.toLowerCase().includes(value.toLowerCase())
-        )
+      const filtered: Product[] = mockProducts.filter((p) =>
+        p.name.toLowerCase().includes(value.toLowerCase())
       );
+      setSuggestions(filtered);
     } else {
-      setSuggestions([]);
+      setSuggestions([] as Product[]);
     }
   };
 
@@ -145,7 +144,7 @@ export default function Header() {
                     </div>
                     {suggestions.length > 0 && (
                       <ul className="mt-2 max-h-40 overflow-y-auto">
-                        {suggestions.map((product) => (
+                        {suggestions.map((product: Product) => (
                           <li
                             key={product.id}
                             className="px-2 py-1 cursor-pointer hover:bg-green-50 rounded"
