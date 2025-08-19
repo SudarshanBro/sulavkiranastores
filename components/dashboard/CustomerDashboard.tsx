@@ -63,6 +63,16 @@ export default function CustomerDashboard() {
   const router = useRouter();
   const { user, addLoyaltyPoints } = useAuth();
 
+  const userName = user?.name || 'Customer';
+  const userInitials = (user?.name || 'C')
+    .split(' ')
+    .map((n) => n[0])
+    .join('');
+  const avatarSrc = user && user.avatar ? user.avatar : '/images/avatar.jpg';
+  const memberSinceText = user?.memberSince
+    ? new Date(user.memberSince).toLocaleDateString()
+    : 'N/A';
+
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case 'delivered': return 'bg-green-100 text-green-800';
@@ -97,7 +107,7 @@ export default function CustomerDashboard() {
       {/* Header with Profile */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user?.name || 'Customer'}!</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Welcome back, {userName}!</h1>
           <p className="text-gray-600">Here's what's happening with your account</p>
         </div>
         <div className="flex items-center space-x-4">
@@ -106,8 +116,8 @@ export default function CustomerDashboard() {
             <p className="text-2xl font-bold text-green-600">{user?.loyaltyPoints || 0}</p>
           </div>
           <Avatar className="h-12 w-12">
-            <AvatarImage src={user?.avatar || '/images/avatar.jpg'} alt={user?.name || 'Customer'} />
-            <AvatarFallback>{user?.name?.split(' ').map(n => n[0]).join('') || 'C'}</AvatarFallback>
+            <AvatarImage src={avatarSrc} alt={userName} />
+            <AvatarFallback>{userInitials}</AvatarFallback>
           </Avatar>
         </div>
       </div>
@@ -215,12 +225,12 @@ export default function CustomerDashboard() {
           <CardContent className="space-y-4">
             <div className="flex items-center space-x-3">
               <Avatar className="h-12 w-12">
-                <AvatarImage src={user?.avatar || '/images/avatar.jpg'} alt={user?.name || 'Customer'} />
-                <AvatarFallback>{user?.name?.split(' ').map(n => n[0]).join('') || 'C'}</AvatarFallback>
+                <AvatarImage src={avatarSrc} alt={userName} />
+                <AvatarFallback>{userInitials}</AvatarFallback>
               </Avatar>
               <div>
-                <p className="font-medium">{user?.name || 'Customer'}</p>
-                <p className="text-sm text-gray-600">Member since {new Date(user?.memberSince || '').toLocaleDateString()}</p>
+                <p className="font-medium">{userName}</p>
+                <p className="text-sm text-gray-600">Member since {memberSinceText}</p>
               </div>
             </div>
             
