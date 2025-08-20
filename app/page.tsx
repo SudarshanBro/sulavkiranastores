@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
-import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/home/HeroSection';
@@ -19,7 +18,6 @@ import { Store } from "lucide-react";
 export default function Home() {
   const { isAuthenticated, isAdmin, isCustomer, user } = useAuth();
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
-  const router = useRouter();
 
   // Debug logging
   useEffect(() => {
