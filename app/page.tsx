@@ -19,7 +19,6 @@ export default function Home() {
   const { isAuthenticated, isAdmin, isCustomer, user } = useAuth();
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
-  // Debug logging
   useEffect(() => {
     if (isAuthenticated) {
       console.log('User authenticated:', {
@@ -33,22 +32,18 @@ export default function Home() {
   }, [isAuthenticated, user, isAdmin, isCustomer]);
 
   useEffect(() => {
-    // Show login prompt after a delay if user is not authenticated
     if (!isAuthenticated) {
       const timer = setTimeout(() => {
         setShowLoginPrompt(true);
-      }, 2000); // Show after 2 seconds
-
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, [isAuthenticated]);
 
-  // If user is logged in as admin, show admin home page
   if (isAuthenticated && isAdmin) {
     return <BusinessPage />;
   }
 
-  // If user is logged in as customer, show regular home page with hero section
   if (isAuthenticated && isCustomer) {
     return (
       <div className="min-h-screen">
@@ -64,7 +59,6 @@ export default function Home() {
     );
   }
 
-  // If user is logged out, show only home page content (hero section only)
   return (
     <div className="min-h-screen">
       <Header />
@@ -72,8 +66,6 @@ export default function Home() {
         <LandingPage />
       </main>
       <Footer />
-      
-      {/* Login Prompt Card */}
       {showLoginPrompt && (
         <LoginPromptCard onClose={() => setShowLoginPrompt(false)} />
       )}
